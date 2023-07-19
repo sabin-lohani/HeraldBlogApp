@@ -8,3 +8,10 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Contacts(models.Model):
+    name = models.CharField(max_length = 150)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
