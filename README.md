@@ -13,19 +13,19 @@ Welcome to HeraldBlogApp! This is a simple web application built using Django, a
 To run the app locally on your machine, follow these steps:
 
 1. Clone the repository to your local machine:
-git clone https://github.com/sabin-lohani/Herald-Django.git
+```git clone https://github.com/sabin-lohani/Herald-Django.git```
 
 2. Install the required dependencies:
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 3. Apply database migrations:
-python manage.py migrate
+```python manage.py migrate```
 
 4. Create a superuser (admin) account:
-python manage.py createsuperuser
+```python manage.py createsuperuser```
 
 5. Start the development server:
-python manage.py runserver
+```python manage.py runserver```
 
 6. Access the app in your web browser at `http://localhost:8000/`
 
