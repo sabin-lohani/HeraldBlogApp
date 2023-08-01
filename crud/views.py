@@ -17,9 +17,7 @@ def index(request):
         Q(title__icontains = q) |
         Q(subheading__icontains = q) 
     )[0:5]
-    footer_content = FooterContent.objects.first()
-    footer_links = FooterLink.objects.all()
-    return render(request,"crud/index.html",{"blogs": blogs, "footer_content": footer_content, 'footer_links': footer_links })
+    return render(request,"crud/index.html",{"blogs": blogs })
 
 def loginPage(request):
     page = 'login'
