@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Blog, Contacts, User,FooterContent, FooterLink # manager objects
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -16,8 +17,11 @@ def index(request):
         Q(author__username__icontains = q) |
         Q(title__icontains = q) |
         Q(subheading__icontains = q) 
-    )[0:5]
-    return render(request,"crud/index.html",{"blogs": blogs })
+    )
+    paginator = Paginator(blogs, 5)
+    page_number = request.GET.get('page')
+    blogsFinal = paginator.get_page(page_number)
+    return render(request,"crud/index.html",{"blogs": blogsFinal })
 
 def loginPage(request):
     page = 'login'
