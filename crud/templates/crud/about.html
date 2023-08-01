@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({%static 'assets/img/home-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>About Us</h1>
+                    <span class="subheading"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>Welcome to our blog app, crafted with love and guided by Mr. Rukesh Shrestha's expertise in Django framework. This summer class has empowered us to delve into the world of web development, equipping us with the skills to create a simple yet efficient blog application. Our app boasts full CRUD functionalities, allowing us to Create, Read, Update, and Delete blog posts effortlessly. With Mr. Shrestha's mentorship, we've gained valuable insights into building dynamic and interactive web experiences. We are excited to continue our journey in the realm of Django, and this blog app stands as a testament to our growth and potential in the field of web development.</p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

@@ -1,9 +1,61 @@
-{%for blog in blogs%}
-<h2>{{blog.title}}</h2>
-<p>{{blog.description}}</p>
-{%endfor%}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({%static 'assets/img/home-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Herald BlogApp</h1>
+                    <span class="subheading">A Project Outcome of Summer Django Class</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-{%if blog%}
-<h2>{{blog.title}}</h2>
-<p>{{blog.description}}</p>
-{%endif%}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <form class="form-inline my-2 my-lg-0">
+                <div class="d-flex">
+                    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </div>
+            </form>
+            {%if blogs.count == 0 %}
+                    <p class="text-center">No blog availabe</p>
+            
+            {% else %}
+            <!-- Post preview-->
+            <div class="post-preview">
+                {%for blog in blogs%}
+                    <a href="{% url 'crud:part-data' blog.id %}">
+                        <h2 class="post-title">{{blog.title}}</h2>
+                        <h3 class="post-subtitle">{{blog.subheading}}</h3>
+                    </a>
+                    {% if request.user == blog.author %}
+                    <a href="{% url 'crud:update-blog' blog.id %}" class="btn btn-sm btn-secondary text-light">Edit</a>
+                    <a href="{% url 'crud:delete-blog' blog.id %}" class="btn btn-sm btn-danger text-light">Delete</a>
+                    {% endif %}
+
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#!">{{blog.author.username}}</a>
+                        on {{blog.created}}
+                    </p>
+                {%endfor%}
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="text-primary text-uppercase" href="#!">All Posts →</a></div>
+            {%endif%}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
