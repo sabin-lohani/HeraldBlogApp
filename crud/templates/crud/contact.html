@@ -33,23 +33,22 @@
                     <form method="POST" id="contactForm" data-sb-form-api-token="API_TOKEN">
                         {%csrf_token%}
                         <div class="form-floating">
-                            <input required class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                            <label for="name">Name</label>
+                            <input required class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                            <label for="name">Your Name</label>
                             <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                         </div>
                         <div class="form-floating">
-                            <input required class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
+                            <input required class="form-control" id="email" name="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
                             <label for="email">Email address</label>
                             <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                             <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                         </div>
                         <div class="form-floating">
-                            <input required class="form-control" id="phone" type="tel" placeholder="Enter your phone number..." data-sb-validations="required" />
-                            <label for="phone">Phone Number</label>
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            <input required class="form-control" id="subject" name="subject" type="text" placeholder="Enter subject..." data-sb-validations="required" />
+                            <label for="subject">Subject</label>
                         </div>
                         <div class="form-floating">
-                            <textarea required class="form-control" id="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                            <textarea required class="form-control" id="message" name="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
                             <label for="message">Message</label>
                             <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                         </div>

@@ -39,6 +39,18 @@ python manage.py runserver
 
 6. Access the app in your web browser at `http://localhost:8000/`
 
+## Environment Variables
+
+Before running the app, make sure to set up the following environment variables:
+
+- EMAIL_BACKEND: The email backend for sending notifications.
+- EMAIL_HOST: The hostname of the email server.
+- EMAIL_HOST_USER: The email address for sender authentication.
+- EMAIL_HOST_PASSWORD: The password for the email account used for sender authentication.
+- EMAIL_PORT: The port number for the email server.
+- EMAIL_USE_TLS: Set this to True if using TLS encrypted connection.
+- DEFAULT_FROM_EMAIL: The default "From" email address used in the application for sending emails.
+
 ## Technologies Used
 
 - Python

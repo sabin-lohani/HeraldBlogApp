@@ -1,3 +1,7 @@
+from django.core.mail import EmailMessage
+from projectdemo.settings import EMAIL_HOST_USER #replace root with your project name
+from django.template.loader import render_to_string
+
 from django.shortcuts import render, redirect
 from .models import Blog, Contacts, User,FooterContent, FooterLink # manager objects
 from django.core.paginator import Paginator
@@ -122,17 +126,24 @@ def contacts(request):
     if(request.method == "POST"):
         dataName = request.POST.get("name")
         dataEmail = request.POST.get("email")
-        dataPhone = request.POST.get("phone")
+        dataSubject = request.POST.get("subject")
         dataMessage = request.POST.get("message")
-        # BlogForm.create(
-        #     data
+        template = render_to_string('crud/email.html',{'name':dataName,'description':dataMessage,'mail':dataEmail})
+        recipient = EMAIL_HOST_USER,
+
+        email = EmailMessage(dataSubject,template,EMAIL_HOST_USER,recipient)
+
+        email.fail_silently=False
+        if email!=None:
+            email.send()
+
+
+        # contacts = Contacts.objects.create(
+        #     name = dataName,
+        #     email = dataEmail,
+        #     message = dataMessage
         # )
-        contacts = Contacts.objects.create(
-            name = dataName,
-            email = dataEmail,
-            phone = dataPhone,
-            message = dataMessage
-        )
+
         return redirect('crud:home')
 
     return render(request, "crud/contact.html")
