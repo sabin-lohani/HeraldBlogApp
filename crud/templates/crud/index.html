@@ -21,7 +21,7 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             <form class="form-inline my-2 my-lg-0">
                 <div class="d-flex">
-                    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </div>
             </form>
@@ -46,10 +46,10 @@
                         <a href="#!">{{blog.author.username}}</a>
                         on {{blog.created}}
                     </p>
+                    <!-- Divider-->
+                    <hr class="my-4" />
                 {%endfor%}
             </div>
-            <!-- Divider-->
-            <hr class="my-4" />
             
             <!-- Pager-->
             {% comment %} <div class="d-flex justify-content-end mb-4"><a class="text-primary text-uppercase" href="#!">All Posts →</a></div> {% endcomment %}

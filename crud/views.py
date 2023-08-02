@@ -104,7 +104,7 @@ def edit(request, id):
         form = BlogForm(request.POST, instance=blog)
         if(form.is_valid()):
             form.save()
-            return redirect('home')
+            return redirect('crud:home')
     
     return render(request, "crud/edit.html", {"form": form, 'id': id})
 
