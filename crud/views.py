@@ -90,14 +90,21 @@ def partData(request, id):
 @login_required(login_url = "crud:login")
 def createBlog(request):
     if(request.method == 'POST'):
-        Blog.objects.create(
-            author = request.user,
-            title = request.POST.get('title'),
-            subheading = request.POST.get('subheading'),
-            description = request.POST.get('description')
-        )
-        return redirect('crud:home')
-    return render(request, "crud/create-blog.html")
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            blog.save()
+            return redirect('crud:home')
+        # Blog.objects.create(
+        #     author = request.user,
+        #     title = request.POST.get('title'),
+        #     subheading = request.POST.get('subheading'),
+        #     description = request.POST.get('description')
+        # )
+    else:
+        form = BlogForm()
+    return render(request, 'crud/create-blog.html', {'form': form})
 
 @login_required(login_url = "crud:login")
 def edit(request, id):

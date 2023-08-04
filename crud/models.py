@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class User(AbstractUser):
     name = models.CharField(max_length=200, null=True)
@@ -11,7 +12,7 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=200)
     subheading=models.CharField(max_length=200, null=True)
-    description=models.TextField()
+    body=RichTextUploadingField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

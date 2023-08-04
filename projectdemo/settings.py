@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-_n&4(uoxt&q4=!5@fz!)m=to&o*k9elc64l%w$=*bp)=mxz^*m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['192.168.100.110']
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Application definition
 
@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "crud.apps.CrudConfig"
+    "crud.apps.CrudConfig",
+    "ckeditor",
+    "ckeditor_uploader",
 ]
 
 AUTH_USER_MODEL = 'crud.User'
@@ -125,7 +127,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'public/'
+STATIC_URL = '/public/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/blog-post-media/'
+
+CKEDITOR_UPLOAD_PATH = 'blog-post-media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "public"),

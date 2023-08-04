@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block extra_head %}
+<style>
+    .blog-content img {
+        width: 100% !important;
+        height: auto !important;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <!-- Page Header-->
 <header class="masthead" style="background-image: url('{% static 'assets/img/post-bg.jpg' %}')">
@@ -24,22 +31,22 @@
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
-            {% if request.user == blog.author %}
-
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <h2>{{ blog.title }}</h2>
-                    </div>
+            
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <h2>{{ blog.title }}</h2>
+                </div>
+                    {% if request.user == blog.author %}
                     <div class="d-flex align-items-center">
                         <a href="{% url 'crud:update-blog' blog.id %}" class="btn btn-sm btn-secondary text-light mx-1">Edit</a>
                         <a href="{% url 'crud:delete-blog' blog.id %}" class="btn btn-sm btn-danger text-light mx-1">Delete</a>
                     </div>
+                    {% endif %}
                 </div>
                 <!-- Divider-->
                 <hr class="my-4" />
-            {% endif %}
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                {{ blog.description }}
+            <div class="col-md-10 col-lg-8 col-xl-7 blog-content">
+                {{ blog.body|safe }}
             </div>
         </div>
     </div>
