@@ -3,12 +3,10 @@ from projectdemo.settings import EMAIL_HOST_USER #replace root with your project
 from django.template.loader import render_to_string
 
 from django.shortcuts import render, redirect
-from .models import Blog, Contacts, User,FooterContent, FooterLink # manager objects
+from .models import Blog # manager objects
 from django.core.paginator import Paginator
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import BlogForm, MyUserCreationForm
+from .forms import BlogForm
 from django.db.models import Q
 
 
@@ -27,56 +25,6 @@ def index(request):
     blogsFinal = paginator.get_page(page_number)
     return render(request,"crud/index.html",{"blogs": blogsFinal })
 
-def loginPage(request):
-    page = 'login'
-
-    if request.user.is_authenticated:
-        return redirect('crud:home')
-
-    if request.method == 'POST':
-        email = request.POST.get('email').lower()
-        password = request.POST.get('password')
-
-        try:
-            user = User.objects.get(email = email)
-        except:
-            messages.error(request, "User does not exist")
-
-        user = authenticate(request, email = email, password = password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('crud:home')
-        
-        else:
-            messages.error(request, "Username or password does not exist")
-
-    context = {'page': page}
-    return render(request,"crud/login-register.html", context)
-
-def register(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    form = MyUserCreationForm()
-    for field in form:
-        print(field.label)
-    if request.method == 'POST':
-        form = MyUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('crud:home')
-        else:
-            messages.error(request, 'An error occurred during registration')
-
-    return render(request,"crud/login-register.html", {'form': form})
-
-def logoutUser(request):
-    logout(request)
-    return redirect('crud:home')
-
 def about(request):
     return render(request,"crud/about.html")
 
@@ -87,7 +35,7 @@ def partData(request, id):
     }
     return render(request, "crud/post.html", context)
 
-@login_required(login_url = "crud:login")
+@login_required(login_url = "users:login")
 def createBlog(request):
     if(request.method == 'POST'):
         form = BlogForm(request.POST)
@@ -106,7 +54,7 @@ def createBlog(request):
         form = BlogForm()
     return render(request, 'crud/create-blog.html', {'form': form})
 
-@login_required(login_url = "crud:login")
+@login_required(login_url = "users:login")
 def edit(request, id):
     blog = Blog.objects.get(id = id)
     form = BlogForm(request.POST or None, instance=blog)
@@ -119,7 +67,7 @@ def edit(request, id):
     
     return render(request, "crud/edit.html", {"form": form, 'id': id})
 
-@login_required(login_url = "crud:login")
+@login_required(login_url = "users:login")
 def delete(request, id):
     blog = Blog.objects.get(id = id)
 

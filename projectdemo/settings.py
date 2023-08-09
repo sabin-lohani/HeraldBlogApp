@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-_n&4(uoxt&q4=!5@fz!)m=to&o*k9elc64l%w$=*bp)=mxz^*m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.100.110']
+# ALLOWED_HOSTS = ['10.22.110.58']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Application definition
@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "crud.apps.CrudConfig",
+    "users.apps.UsersConfig",
     "ckeditor",
     "ckeditor_uploader",
 ]
 
-AUTH_USER_MODEL = 'crud.User'
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

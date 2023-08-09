@@ -1,12 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from ckeditor_uploader.fields import RichTextUploadingField
-
-class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
-    email = models.EmailField(unique=True)
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+from users.models import User
 
 class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -30,7 +24,6 @@ class Contacts(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class FooterContent(models.Model):
     copyright_year = models.PositiveIntegerField()

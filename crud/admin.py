@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, Contacts, User, FooterContent, FaIcon, FooterLink
+from .models import Blog, Contacts, FooterContent, FaIcon, FooterLink
 from .forms import BlogForm
 
 admin.site.site_header = 'Herald BlogApp'
@@ -18,7 +18,6 @@ class BlogAdmin(admin.ModelAdmin):
 
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Contacts)
-admin.site.register(User)
 admin.site.register(FooterContent)
 admin.site.register(FaIcon)
 admin.site.register(FooterLink)
