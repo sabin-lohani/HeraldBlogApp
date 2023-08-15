@@ -54,3 +54,23 @@ def register(request):
 def logoutUser(request):
     logout(request)
     return redirect('crud:home')
+
+def resetPassword(request):
+    if request.user.is_authenticated:
+        return redirect('crud:home')
+    
+    if request.method == 'POST':
+        email = request.POST.get('email').lower()
+        password = request.POST.get('password') 
+
+        try:
+            user = User.objects.get(email = email)
+            user.set_password(password)
+            user.save()
+            messages.success(request, 'Password changed successfully')
+            return redirect('users:login')
+
+        except User.DoesNotExist:
+            messages.error(request, "User does not exist")
+
+    return render(request, 'users/reset-password.html')

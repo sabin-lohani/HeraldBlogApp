@@ -59,9 +59,15 @@
                     <li class="page-item"><a class="page-link" href="{% url 'crud:home' %}?page={{blogs.previous_page_number}}">Previous</a></li>
                     {% endif %}
 
-                    {% for page_number in blogs.paginator.page_range %}
-                    <li class="page-item"><a class="page-link {% if page_number == blogs.number %}active{% endif %}" href="{% url 'crud:home' %}?page={{page_number}}">{{page_number}}</a></li>
-                    {% endfor %}
+                    {% if blogs.paginator.num_pages == 1 %}
+                        {% for page_number in blogs.paginator.page_range %}
+                        <li class="page-item"><a class="page-link active disabled" href="{% url 'crud:home' %}?page={{page_number}}">{{page_number}}</a></li>
+                        {% endfor %}
+                    {% else %}
+                        {% for page_number in blogs.paginator.page_range %}
+                        <li class="page-item"><a class="page-link {% if page_number == blogs.number %}active{% endif %}" href="{% url 'crud:home' %}?page={{page_number}}">{{page_number}}</a></li>
+                        {% endfor %}
+                    {% endif %}
 
                     {% if blogs.has_next %} 
                     <li class="page-item"><a class="page-link" href="{% url 'crud:home' %}?page={{blogs.next_page_number}}">Next</a></li>
