@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
+from decouple import config
 
 load_dotenv()
 
@@ -24,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_n&4(uoxt&q4=!5@fz!)m=to&o*k9elc64l%w$=*bp)=mxz^*m'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['10.22.110.58']
+ALLOWED_HOSTS = ['*']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Application definition
@@ -87,10 +89,11 @@ WSGI_APPLICATION = 'projectdemo.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        config("DATABASE"),
+        conn_max_age=600,
+        conn_health_checks=True,
+    ),
 }
 
 
@@ -143,10 +146,10 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = int(os.getenv("EMAIL_PORT"))
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS").lower() == "true"
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = int(config('EMAIL_PORT'))
+EMAIL_USE_TLS = config('EMAIL_USE_TLS').lower() == "true"
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
