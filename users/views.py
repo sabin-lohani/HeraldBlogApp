@@ -49,7 +49,7 @@ def register(request):
         else:
             messages.error(request, 'An error occurred during registration')
 
-    return render("users/login-register.html", {'form': form})
+    return render(request, "users/login-register.html", {'form': form})
 
 def logoutUser(request):
     logout(request)

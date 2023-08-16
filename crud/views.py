@@ -52,7 +52,7 @@ def createBlog(request):
         # )
     else:
         form = BlogForm()
-    return render('crud/create-blog.html', {'form': form})
+    return render(request, 'crud/create-blog.html', {'form': form})
 
 @login_required(login_url = "users:login")
 def edit(request, id):
@@ -65,7 +65,7 @@ def edit(request, id):
             form.save()
             return redirect('crud:home')
     
-    return render("crud/edit.html", {"form": form, 'id': id})
+    return render(request, "crud/edit.html", {"form": form, 'id': id})
 
 @login_required(login_url = "users:login")
 def delete(request, id):
