@@ -4,6 +4,7 @@ from .models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import MyUserCreationForm
+from django.template import RequestContext
 
 def loginPage(request):
     page = 'login'
@@ -49,7 +50,7 @@ def register(request):
         else:
             messages.error(request, 'An error occurred during registration')
 
-    return render(request,"users/login-register.html", {'form': form})
+    return render("users/login-register.html", {'form': form}, RequestContext(request))
 
 def logoutUser(request):
     logout(request)
