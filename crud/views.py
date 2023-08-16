@@ -53,7 +53,7 @@ def createBlog(request):
         # )
     else:
         form = BlogForm()
-    return render('crud/create-blog.html', {'form': form},  RequestContext(request))
+    return render('crud/create-blog.html', {'form': form},  context_instance=RequestContext(request))
 
 @login_required(login_url = "users:login")
 def edit(request, id):
@@ -66,7 +66,7 @@ def edit(request, id):
             form.save()
             return redirect('crud:home')
     
-    return render("crud/edit.html", {"form": form, 'id': id}, RequestContext(request))
+    return render("crud/edit.html", {"form": form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required(login_url = "users:login")
 def delete(request, id):

@@ -50,7 +50,7 @@ def register(request):
         else:
             messages.error(request, 'An error occurred during registration')
 
-    return render("users/login-register.html", {'form': form}, RequestContext(request))
+    return render("users/login-register.html", {'form': form}, context_instance=RequestContext(request))
 
 def logoutUser(request):
     logout(request)
