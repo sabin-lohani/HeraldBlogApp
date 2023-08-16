@@ -8,7 +8,6 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from .forms import BlogForm
 from django.db.models import Q
-from django.template import RequestContext
 
 
 # Create your views here.
@@ -53,7 +52,7 @@ def createBlog(request):
         # )
     else:
         form = BlogForm()
-    return render('crud/create-blog.html', {'form': form},  context_instance=RequestContext(request))
+    return render('crud/create-blog.html', {'form': form})
 
 @login_required(login_url = "users:login")
 def edit(request, id):
@@ -66,7 +65,7 @@ def edit(request, id):
             form.save()
             return redirect('crud:home')
     
-    return render("crud/edit.html", {"form": form, 'id': id}, context_instance=RequestContext(request))
+    return render("crud/edit.html", {"form": form, 'id': id})
 
 @login_required(login_url = "users:login")
 def delete(request, id):
